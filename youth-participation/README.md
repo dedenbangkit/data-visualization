@@ -46,15 +46,7 @@ ds['nodes'][0]
 ds['edges'][0]
 ```
 
-
-
-
     ['nodes', 'edges']
-
-
-
-
-
 
     {'color': '#4f19c7',
      'label': 'jquery',
@@ -63,11 +55,6 @@ ds['edges'][0]
      'x': -739.36383,
      'id': 'jquery',
      'size': 4.7252817}
-
-
-
-
-
 
     {'sourceID': 'jquery', 'attributes': {}, 'targetID': 'jsdom', 'size': 1}
 
@@ -81,28 +68,11 @@ sn = pd.DataFrame(ds['nodes'])
 se = pd.DataFrame(ds['edges'])
 ```
 
-
 ```python
 sn.iloc[:5]
 ```
 
-
-
-
 <div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
 <table border="1" class="dataframe">
   <thead>
     <tr style="text-align: right;">
@@ -172,29 +142,11 @@ sn.iloc[:5]
 </div>
 
 
-
-
 ```python
 se.iloc[:5]
 ```
 
-
-
-
 <div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
 <table border="1" class="dataframe">
   <thead>
     <tr style="text-align: right;">
@@ -244,7 +196,6 @@ se.iloc[:5]
   </tbody>
 </table>
 </div>
-
 
 
 # Database Import
@@ -305,28 +256,11 @@ youth_participation['Nama Lengkap'] = youth_participation['Nama Lengkap'].str.ti
 youth_participation['Jenis Kelamin'] = youth_participation['Jenis Kelamin'].str.upper()
 ```
 
-
 ```python
 youth_participation.iloc[:5]
 ```
 
-
-
-
 <div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
 <table border="1" class="dataframe">
   <thead>
     <tr style="text-align: right;">
@@ -402,7 +336,6 @@ youth_participation.iloc[:5]
 </div>
 
 
-
 # Transformations
 
 ## Youth Participants
@@ -466,21 +399,11 @@ youth_size.sort_values(by=['size'])[:1]['size']
 youth_size.sort_values(by=['size']).tail(1)['size']
 ```
 
-
-
-
     2098    1
     Name: size, dtype: int64
 
-
-
-
-
-
     202    43
     Name: size, dtype: int64
-
-
 
 
 ```python
@@ -488,26 +411,16 @@ youth_size.sort_values(by=['size']).tail(1)['size']
 #youth_size['size'] = youth_size['size'] / 2
 ```
 
-
 ```python
 youth_size.sort_values(by=['size'])[:1]['size']
 youth_size.sort_values(by=['size']).tail(1)['size']
 ```
 
-
-
-
     2098    1
     Name: size, dtype: int64
 
-
-
-
-
-
     202    43
     Name: size, dtype: int64
-
 
 
 ### Generate Coordinates
@@ -530,7 +443,6 @@ goal_size = youth_participation.groupby(['Goal Code']).size().to_frame('size').r
 ### Coloring
 
 _Using Library_ : **webcolors**
-
 
 ```python
 def randomCol():
@@ -568,27 +480,16 @@ goal_size = goal_size[['attributes','color','id','label','size']]
 
 *Actual Value*
 
-
 ```python
 goal_size.sort_values(by=['size'])[:1]['size']
 goal_size.sort_values(by=['size']).tail(1)['size']
 ```
 
-
-
-
     21    1
     Name: size, dtype: int64
 
-
-
-
-
-
     0    984
     Name: size, dtype: int64
-
-
 
 
 ```python
@@ -597,30 +498,18 @@ goal_size['size'] = goal_size['size'].apply(lambda x: x*100 if x < 0.1 else x)
 goal_size['size'] = goal_size['size'].apply(lambda x: x + 10 if x < 10 else x)
 ```
 
-
 ```python
 goal_size.sort_values(by=['size'])[:1]['size']
 goal_size.sort_values(by=['size']).tail(1)['size']
 ```
 
-
-
-
     8    10.183528
     Name: size, dtype: float64
-
-
-
-
-
 
     0    22.573985
     Name: size, dtype: float64
 
-
-
 ### Generate Coordinates
-
 
 ```python
 goal_size['x'] = np.random.uniform(-150,150,size=len(goal_size))
@@ -628,7 +517,6 @@ goal_size['y'] = np.random.uniform(-150,150,size=len(goal_size))
 ```
 
 ### Offset Coordinates
-
 
 ```python
 goal_size['x'] = goal_size.apply(lambda r: np.random.uniform(-150,-100) if -100 > r['x'] else r['x'], axis=1)
@@ -644,19 +532,14 @@ goal_size['y'] = goal_size.apply(lambda r: np.random.uniform(100,150) if 100 < r
 Nodes are goal codes and youth participations rows
 Both rows defined as individual data that has coordinate (position) and value (point size)
 
-
 ```python
 nodes = youth_size.append(goal_size)
 nodes = nodes.to_dict('record')
 ```
 
-
 ```python
 nodes[0]
 ```
-
-
-
 
     {'attributes': {'Jenis Kelamin': 'L',
       'Kota / Kab': 'Kab. Maros',
@@ -669,13 +552,10 @@ nodes[0]
      'x': -36.21170475918192,
      'y': 20.51688961747722}
 
-
-
 ## Create Edges
 
 - Edges defines the relationship between both dataframe
 - How many times an individual youth attend the activities
-
 
 ```python
 edges = youth_participation.rename(columns={
@@ -687,20 +567,13 @@ edges['size'] = 1
 edges = edges.to_dict('record')
 ```
 
-
 ```python
 edges[0]
 ```
-
-
-
-
     {'sourceID': 'cjxm-dhfw-98yx',
      'targetID': '3.1.1.1',
      'attributes': {},
      'size': 1}
-
-
 
 ## Export to JSON
 
