@@ -719,18 +719,7 @@ with open('../dist/output-table.json', 'w') as fp:
 ```python
 IFrame('http://localhost:3000', width=850, height=700)
 ```
+<iframe width="850" height="700" src="http://localhost:3000" frameborder="0" allowfullscreen></iframe>
 
-
-
-
-
-        <iframe
-            width="850"
-            height="700"
-            src="http://localhost:3000"
-            frameborder="0"
-            allowfullscreen
-        ></iframe>
-        
 
 
